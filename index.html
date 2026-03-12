@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hafeez Afzal | Connect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-hover: rgba(255, 255, 255, 0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            color: var(--text-color);
+            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #312e81, #1e293b);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .profile-container {
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+        }
+
+        .animate-item {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-pic {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            animation-delay: 0.1s;
+            overflow: hidden;
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 0 0 8px 0;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            animation-delay: 0.2s;
+        }
+
+        p.bio {
+            color: #94a3b8;
+            margin-bottom: 35px;
+            font-size: 1rem;
+            animation-delay: 0.3s;
+        }
+
+        .section-title {
+            text-align: left;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #94a3b8;
+            margin: 30px 0 15px 5px;
+            animation-delay: 0.4s;
+        }
+
+        .link-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 15px;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .link-card:hover {
+            background: var(--glass-hover);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .delay-1 { animation-delay: 0.5s; }
+        .delay-2 { animation-delay: 0.6s; }
+        .delay-3 { animation-delay: 0.7s; }
+        .delay-4 { animation-delay: 0.8s; }
+        .delay-5 { animation-delay: 0.9s; }
+        .delay-6 { animation-delay: 1.0s; }
+
+        .icon-wrapper {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 18px;
+            font-size: 1.4rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .link-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex-grow: 1;
+        }
+
+        .link-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            letter-spacing: 0.3px;
+        }
+
+        .link-subtitle {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin-top: 4px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 70vh;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            animation: fadeInUp 0.3s ease-out forwards;
+        }
+
+        .close-modal {
+            color: white;
+            font-size: 2.5rem;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #ef4444;
+        }
+
+        /* Brand Colors */
+        .instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .linkedin { background: #0077b5; }
+        .whatsapp { background: #25D366; }
+        .phone { background: #3b82f6; }
+        .email { background: #ef4444; }
+        .abl { background: #f37021; } 
+        .easypaisa { background: #00c653; } 
+        .jazzcash { background: #ed1c24; }
+        .nayapay { background: #ff6a00; }
+        .sadapay { background: #ff7c6b; }
+        .upaisa { background: #f36c21; }
+        .zindigi { background: #8e24aa; }
+
+    </style>
+</head>
+<body>
+
+    <div id="qrModal" class="modal" onclick="closeModal(event)">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="qrImage" src="" alt="QR Code">
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-pic animate-item">
+            <img src="me.jpeg" alt="Hafeez Afzal">
+        </div>
+        <h1 class="animate-item">Hafeez Afzal</h1>
+        <p>03368222244</p> 
+        <p class="bio animate-item">Scan. Pay. Connect </p>
+
+        <div class="section-title animate-item"> <h2>Connect & Contact</h2></div>
+
+        <a href="https://wa.me/923368222244" class="link-card animate-item delay-1" target="_blank">
+            <div class="icon-wrapper whatsapp"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="link-info">
+                <span class="link-title">WhatsApp</span>
+                <span class="link-subtitle">+92 336 8222244</span>
+            </div>
+        </a>
+          <a href="https://www.instagram.com/iihafeezoorrr_?igsh=MWcwcWlpYnE2MDdocQ==" class="link-card animate-item delay-2" target="_blank">
+            <div class="icon-wrapper instagram"><i class="fa-brands fa-instagram"></i></div>
+            <div class="link-info">
+                <span class="link-title">Instagram</span>
+                <span class="link-subtitle">@iihafeezoorrr_</span>
+            </div>
+        </a>
+
+
+        <a href="tel:+923368222244" class="link-card animate-item delay-1">
+            <div class="icon-wrapper phone"><i class="fa-solid fa-phone"></i></div>
+            <div class="link-info">
+                <span class="link-title">Direct Call</span>
+                <span class="link-subtitle">0336 8222244</span>
+            </div>
+        </a>
+
+        <a href="mailto:hafeezafzal1860@gmail.com" class="link-card animate-item delay-2">
+            <div class="icon-wrapper email"><i class="fa-solid fa-envelope"></i></div>
+            <div class="link-info">
+                <span class="link-title">Email</span>
+                <span class="link-subtitle">hafeezafzal1860@gmail.com</span>
+            </div>
+        </a>
+
+
+        <a href="https://www.linkedin.com/in/hafeez-afzal-586877351" class="link-card animate-item delay-3" target="_blank">
+            <div class="icon-wrapper linkedin"><i class="fa-brands fa-linkedin-in"></i></div>
+            <div class="link-info">
+                <span class="link-title">LinkedIn</span>
+                <span class="link-subtitle">Professional Profile</span>
+            </div>
+        </a>
+
+        <div class="section-title animate-item delay-3" onclick="togglePayments()" style="cursor: pointer;"> 
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="margin: 0;">Payments & Wallets</h2>
+                <i id="paymentArrow" class="fa-solid fa-chevron-down" style="transition: transform 0.3s; font-size: 1.2rem;"></i>
+            </div>
+            <h3 style="margin-top: 10px; margin-bottom: 5px;">
+            <span style="line-height: 1.5;">
+            </span>
+        </div>
+
+        <div id="paymentsContainer" style="display: none;">
+            <div class="link-card animate-item delay-4" onclick="openModal('abl.jpeg')"> 
+                <div class="icon-wrapper abl"><img src="ab.jpg" alt="ABL" style="width: 100%; height: 100%; border-radius: 12px; object-fit: cover;"></div>
+                <div class="link-info">
+                    <span class="link-title">ABL Bank</span>
+                    <span class="link-subtitle">Tap to view QR Code</span>
+                </div>
+            </div>
+
+            <div class="link-card animate-item delay-4" onclick="openModal('easypissa.jpeg')">
+                <div class="icon-wrapper easypaisa"><img src="ep.png" alt="Easypaisa" style="width: 100%; height: 100%; border-radius: 12px; object-fit: cover;"></div>
+                <div class="link-info">
+                    <span class="link-title">Easypaisa</span>
+                    <span class="link-subtitle">Tap to view QR Code</span>
+                </div>
+            </div>
+
+            <div class="link-card animate-item delay-5" onclick="openModal('jazzcash.jpeg')">
+                <div class="icon-wrapper jazzcash"><img src="jc.png" alt="JazzCash" style="width: 100%; height: 100%; border-radius: 12px; object-fit: cover;"></div>
+                <div class="link-info">
+                    <span class="link-title">JazzCash</span>
+                    <span class="link-subtitle">Tap to view QR Code</span>
+                </div>
+            </div>
+
+            <div class="link-card animate-item delay-5" onclick="openModal('naypay.jpeg')">
+                <div class="icon-wrapper nayapay"><img src="np.png" alt="NayaPay" style="width: 100%; height: 100%; border-radius: 12px; object-fit: cover;"></div>
+                <div class="link-info">
+                    <span class="link-title">NayaPay</span>
+                    <span class="link-subtitle">Tap to view QR Code</span>
+                </div>
+            </div>
+
+            <div class="link-card animate-item delay-6"  onclick="openModal('sadapay.jpeg')">
+                <div class="icon-wrapper sadapay"><img src="sp.png" alt="SadaPay" style="width: 100%; height: 100%; border-radius: 12px; object-fit: cover;"></div>
+                <div class="link-info">
+                    <span class="link-title">SadaPay</span>
+                    <span class="link-subtitle">Tap to view Details</span>
+                </div>
+            </div>
+
+            <div class="link-card animate-item delay-6" onclick="openModal('u.jpeg')">
+                <div class="icon-wrapper upaisa"><img src="up.png" alt="UPaisa" style="width: 100%; height: 100%; border-radius: 12px; object-fit: cover;"></div>
+                <div class="link-info">
+                    <span class="link-title">UPaisa</span>
+                    <span class="link-subtitle">Tap to view QR Code</span>
+                </div>
+            </div>
+
+            <div class="link-card animate-item delay-6" onclick="openModal('z.jpeg')">
+                <div class="icon-wrapper zindigi"><img src="zp.png" alt="Zindigi" style="width: 100%; height: 100%; border-radius: 12px; object-fit: cover;"></div>
+                <div class="link-info">
+                    <span class="link-title">Zindigi</span>
+                    <span class="link-subtitle">Tap to view QR Code</span>
+                </div>
+            </div>
+        </div>
+        </div>
+
+   <script>
+        function openModal(imageSrc) {
+            document.getElementById('qrImage').src = imageSrc;
+            document.getElementById('qrModal').style.display = 'flex';
+        }
+
+        function closeModal(event) {
+            if (event.target.id === 'qrModal' || event.target.className === 'close-modal') {
+                document.getElementById('qrModal').style.display = 'none';
+            }
+        }
+
+        function togglePayments() {
+            var container = document.getElementById("paymentsContainer");
+            var arrow = document.getElementById("paymentArrow");
+            
+            if (container.style.display === "none") {
+                container.style.display = "block";
+                arrow.style.transform = "rotate(180deg)";
+            } else {
+                container.style.display = "none";
+                arrow.style.transform = "rotate(0deg)";
+            }
+        }
+
+        // --- AUTO-OPEN LOGIC FOR ALL APPS ---
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const scanApp = urlParams.get('app');
+
+            if (scanApp) {
+                // Map the URL tag to your exact image filenames
+                const appMap = {
+                    'abl': 'abl.jpeg',
+                    'easypaisa': 'easypissa.jpeg',
+                    'jazzcash': 'jazzcash.jpeg',
+                    'nayapay': 'naypay.jpeg',
+                    'sadapay': 'sadapay.jpeg',
+                    'upaisa': 'u.jpeg',
+                    'zindigi': 'z.jpeg'
+                };
+
+                if (appMap[scanApp]) {
+                    // 1. Open the dropdown menu first
+                    togglePayments();
+                    
+                    // 2. Pop up the specific QR image after 300ms
+                    setTimeout(() => {
+                        openModal(appMap[scanApp]);
+                    }, 300);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
