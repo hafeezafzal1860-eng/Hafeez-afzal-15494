@@ -216,7 +216,7 @@
         .info-medical { background: #14b8a6; }
         .info-location { background: #10b981; }
         .info-emergency { background: #f59e0b; }
-        .info-dob { background: #eab308; } /* Added a color for DOB icon */
+        .info-dob { background: #eab308; } 
 
     </style>
 </head>
@@ -232,8 +232,7 @@
             <img src="me.jpeg" alt="Hafeez Afzal">
         </div>
         <h1 class="animate-item">Hafeez Afzal</h1>
-        <p>03368222244</p> 
-        <p class="bio animate-item">Tap. Connect. Done. </p>
+        <p class="bio animate-item">The Smart Way to Share </p>
 
         <div class="section-title animate-item"> <h2>Connect & Contact</h2></div>
 
@@ -276,6 +275,17 @@
             </div>
         </a>
 
+        <a href="https://www.threads.net/@iihafeez_?igshid=NTc4MTIwNjQ2YQ==" class="link-card animate-item delay-2" target="_blank">
+            <div class="icon-wrapper" style="background: linear-gradient(145deg, #333, #000); position: relative;">
+                <i class="fa-solid fa-comment-dots" style="color: white; font-size: 1.2rem;"></i>
+                <i class="fa-solid fa-at" style="color: white; font-size: 0.6rem; position: absolute; bottom: 12px; right: 12px; background: #000; border-radius: 50%; padding: 1px;"></i>
+            </div>
+            <div class="link-info">
+                <span class="link-title">Threads Chat</span>
+                <span class="link-subtitle">@iihafeez_</span>
+            </div>
+        </a>
+
         <a href="https://mobile.capcutshare.com/sv2/ZSHUvtSvV/" class="link-card animate-item delay-3" target="_blank">
             <div class="icon-wrapper capcut"><i class="fa-solid fa-scissors"></i></div>
             <div class="link-info">
@@ -286,8 +296,12 @@
 
         <div class="section-title animate-item delay-4" onclick="togglePersonalInfo()" style="cursor: pointer;"> 
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h2 style="margin: 0;"><i class="fa-solid fa-lock" style="font-size: 0.9rem; margin-right: 5px;"></i> Personal Info</h2>
-                <i id="personalInfoArrow" class="fa-solid fa-chevron-down" style="transition: transform 0.3s; font-size: 1.2rem;"></i>
+                <h2 style="margin: 0;">Personal Info</h2>
+                
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <i class="fa-solid fa-lock" style="font-size: 0.9rem; color: #94a3b8; opacity: 0.8;"></i>
+                    <i id="personalInfoArrow" class="fa-solid fa-chevron-down" style="transition: transform 0.3s; font-size: 1.2rem;"></i>
+                </div>
             </div>
         </div>
 
@@ -331,6 +345,16 @@
                     <span class="link-subtitle">Rafique line saddar cantt peshawar</span>
                 </div>
             </div>
+          <a href="tel:+923224554444" class="link-card animate-item delay-1">
+            <div class="icon-wrapper" style="background: #6366f1; position: relative;">
+                <i class="fa-solid fa-phone" style="font-size: 1.1rem;"></i>
+                <span style="position: absolute; top: 8px; right: 8px; font-size: 0.65rem; font-weight: 800; background: white; color: #6366f1; width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid #6366f1;">2</span>
+            </div>
+            <div class="link-info">
+                <span class="link-title">Secondary Number</span>
+                <span class="link-subtitle">0322 4554444</span>
+            </div>
+        </a>
         </div>
 
         <div class="section-title animate-item delay-4" onclick="toggleEmergencyInfo()" style="cursor: pointer;"> 
@@ -443,7 +467,6 @@
     </div>
 
    <script>
-        // Set your secure 4-digit PIN here
         const SECURE_PIN = "1549";
         let isPinVerified = false;
 
@@ -476,16 +499,15 @@
             var arrow = document.getElementById("personalInfoArrow");
             
             if (container.style.display === "none" || container.style.display === "") {
-                // Check PIN before opening
                 if (!isPinVerified) {
                     let enteredPin = prompt("Please enter the 4-digit PIN to access Personal Info:");
                     if (enteredPin === SECURE_PIN) {
-                        isPinVerified = true; // Pin is correct, don't ask again this session
+                        isPinVerified = true; 
                     } else {
                         if(enteredPin !== null) {
                             alert("Incorrect PIN. Access Denied.");
                         }
-                        return; // Stop execution, don't open
+                        return; 
                     }
                 }
                 
@@ -510,13 +532,11 @@
             }
         }
 
-        // --- AUTO-OPEN LOGIC FOR ALL APPS ---
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const scanApp = urlParams.get('app');
 
             if (scanApp) {
-                // Map the URL tag to your exact image filenames
                 const appMap = {
                     'abl': 'abl.jpeg',
                     'easypaisa': 'easypissa.jpeg',
@@ -528,10 +548,7 @@
                 };
 
                 if (appMap[scanApp]) {
-                    // 1. Open the dropdown menu first
                     togglePayments();
-                    
-                    // 2. Pop up the specific QR image after 300ms
                     setTimeout(() => {
                         openModal(appMap[scanApp]);
                     }, 300);
